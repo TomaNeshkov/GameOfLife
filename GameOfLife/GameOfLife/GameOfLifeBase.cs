@@ -137,7 +137,7 @@ namespace GameOfLife
                 return true;
             }
 
-            if (cellCol + neighbourCellCol < 0 || cellCol + neighbourCellCol >= CurrentCellGeneration.GetLength(0))
+            if (cellCol + neighbourCellCol < 0 || cellCol + neighbourCellCol >= CurrentCellGeneration.GetLength(1))
             {
                 return true;
             }

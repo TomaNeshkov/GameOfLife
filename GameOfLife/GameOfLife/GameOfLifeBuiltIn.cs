@@ -1,10 +1,6 @@
 ﻿using GameOfLife;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace GameOfLife
 {
@@ -39,27 +35,27 @@ namespace GameOfLife
 
         private int[,] GetFieldAsTextFile(string fileName)
         {
-            string[] textFile = File.ReadAllText(fileName).Split(",").ToArray();
+            string[] textFile = File.ReadAllText(fileName).Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
-            int[,] filed = new int[CurrentCellGeneration.GetLength(0), CurrentCellGeneration.GetLength(1)];
+            int[,] field = new int[CurrentCellGeneration.GetLength(0), CurrentCellGeneration.GetLength(1)];
 
-            for (int row = 0; row < textFile.Length; row++)
+            for (int row = 0; row < Math.Min(CurrentCellGeneration.GetLength(0), textFile.Length); row++)
             {
                 string currentRow = textFile[row].Trim();
 
-                for (int col = 0; col < currentRow.Length; col++)
+                for (int col = 0; col < Math.Min(CurrentCellGeneration.GetLength(1), currentRow.Length); col++)
                 {
                     if (currentRow[col] == 'X')
                     {
-                        filed[row, col] = 1;
+                        field[row, col] = 1;
                     }
                 }
             }
 
-            return filed;
+            return field;
         }
 
-        public void GenerateFiled(string fileName)
+        public void GenerateField(string fileName)
         {
             int[,] field = GetFieldAsTextFile(fileName);
 
