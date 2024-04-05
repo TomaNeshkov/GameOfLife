@@ -206,7 +206,7 @@ void UseBuiltInFields()
 
 void GenerateField(GameOfLifeBuiltIn gameOfLife, string fileName)
 {
-    gameOfLife.GenerateField(fileName);
+    gameOfLife.GenerateFiled(fileName);
     Console.SetCursorPosition(0, 0);
     Console.WriteLine(gameOfLife.Draw(BoardSize, WindowWidth));
 }
